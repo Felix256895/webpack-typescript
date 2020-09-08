@@ -12,7 +12,7 @@ let greeter: Greeter = new Greeter('hello');
 
 console.log(greeter.greet());
 
-class Animal {
+abstract class Animal {
   public name: string;
   public constructor(theName: string) {
     this.name = theName;
@@ -20,11 +20,17 @@ class Animal {
   move(distance: number = 0) {
     console.log(`Animal mover ${distance} m.`)
   }
+  protected get() {}
+  static food: string = "food";
+  abstract sleep(): void;
 }
 
 class Dog extends Animal {
-  constructor(name: string) {
+  color: string;
+  constructor(name: string, color: string) {
     super(name);
+    this.color = color;
+    this.get();
   }
   move(distance = 5) {
     console.log('dog');
@@ -33,13 +39,25 @@ class Dog extends Animal {
   bark() {
     console.log('woof woof!');
   }
+  sleep() {
+    console.log('this is dog');
+  }
 }
 
-const dog = new Dog('This is Dog');
+class cat extends Animal {
+  sleep() {
+    console.log('this is cat');
+  }
+}
+
+const dog = new Dog('This is Dog', 'red');
 dog.bark();
 dog.move();
 dog.bark();
 console.log(dog.name);
+console.log(Dog.food);
+console.log(Animal.food);
+
 
 class Point {
   x: number;
@@ -56,3 +74,20 @@ interface Point3d extends Point {
 
 let point3d: Point3d = {x: 1, y: 2, z: 3};
 console.log(point3d);
+
+class Work {
+  good() {
+    return this;
+  }
+  food() {
+    return this;
+  }
+}
+new Work().food().good();
+class My extends Work {
+  next() {
+    return this;
+  }
+}
+
+console.log(new My().next().good().next().food());

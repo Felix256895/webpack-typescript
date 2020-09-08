@@ -18,4 +18,7 @@ console.log(obj);
 const arr = [1, 2, 3, 4];
 arr.map(item => {
   console.log(item);
-})
+});
+
+import './advanced/this-types';
+import './advanced/index-types'
